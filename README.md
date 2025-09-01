@@ -3,5 +3,5 @@
 Этот репозиторий является каркасом для будущего веб-приложения.
 
 ## Ссылки
-- [Публичная страница на GitHub Pages](https://MNwa610.github.io/my-awesome-project/)
+- [Публичная страница на GitHub Pages](https://MNwa610.github.io/my-awesome-project1/)
 
