@@ -6,7 +6,6 @@
     --color-muted: #666;
     --color-primary: #0a84ff;
     --color-danger: #b00020;
-    --color-success: #2e7d32;
   
     /* Типографика и размеры */
     --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -19,9 +18,6 @@
     /* Скругления и тени */
     --radius: 12px;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.08);
-  
-    /* Размеры контейнера */
-    --container-width: min(100% - 2 * var(--space-4), 1120px);
   }
   
   /* Тёмная тема */
@@ -70,20 +66,9 @@
     scroll-behavior: smooth;
   }
   
-  .container {
-    width: var(--container-width);
-    margin-inline: auto;
-  }
-  
   /* ===== COMPONENTS: HEADER & NAVIGATION ===== */
   .site-header {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
     padding: var(--space-3) 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
   
   .site-header__inner {
@@ -112,7 +97,7 @@
     text-decoration: none;
     padding: var(--space-2) var(--space-3);
     border-radius: var(--radius);
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
   }
   
   .site-nav__link:hover {
@@ -125,16 +110,7 @@
     outline-offset: 2px;
   }
   
-  .site-nav__link--active {
-    background-color: var(--color-primary);
-    color: white;
-  }
-  
   /* ===== COMPONENTS: BREADCRUMBS ===== */
-  .breadcrumbs {
-    padding: var(--space-3) 0;
-  }
-  
   .breadcrumbs__list {
     display: flex;
     list-style: none;
@@ -165,11 +141,6 @@
   
   .section__title {
     margin: 0 0 var(--space-3);
-    font-size: 2rem;
-  }
-  
-  .section__content {
-    line-height: 1.6;
   }
   
   /* Target styles for anchor links */
@@ -180,11 +151,6 @@
   }
   
   /* ===== COMPONENTS: FORM ===== */
-  .form {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
   .form__group {
     margin-bottom: var(--space-3);
   }
@@ -203,7 +169,6 @@
     border: 1px solid var(--color-muted);
     border-radius: var(--radius);
     background: var(--color-bg);
-    transition: border-color 0.3s ease;
   }
   
   .form__input:focus,
@@ -238,28 +203,13 @@
     border: none;
     border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
-    text-align: center;
   }
   
   .btn--primary {
     background-color: var(--color-primary);
     color: white;
-  }
-  
-  .btn--primary:hover {
-    background-color: #0066cc;
-  }
-  
-  .btn--secondary {
-    background-color: var(--color-muted);
-    color: white;
-  }
-  
-  .btn--secondary:hover {
-    background-color: #555;
   }
   
   .btn:focus-visible {
@@ -286,29 +236,6 @@
     background: rgba(0, 0, 0, 0.5);
   }
   
-  .modal__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-3);
-  }
-  
-  .modal__title {
-    margin: 0;
-  }
-  
-  .modal__close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--color-muted);
-  }
-  
-  .modal__close:hover {
-    color: var(--color-fg);
-  }
-  
   /* ===== COMPONENTS: HERO SECTION ===== */
   .hero {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.15)),
@@ -318,17 +245,6 @@
     border-radius: var(--radius);
     text-align: center;
     margin-bottom: var(--space-5);
-  }
-  
-  .hero__title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    margin: 0 0 var(--space-3);
-  }
-  
-  .hero__description {
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    max-width: 600px;
-    margin: 0 auto;
   }
   
   /* ===== COMPONENTS: MEDIA CONTAINER ===== */
@@ -346,31 +262,6 @@
     height: 100%;
     border: 0;
     border-radius: var(--radius);
-  }
-  
-  /* ===== UTILITIES ===== */
-  .text-center {
-    text-align: center;
-  }
-  
-  .mb-1 {
-    margin-bottom: var(--space-1);
-  }
-  
-  .mb-2 {
-    margin-bottom: var(--space-2);
-  }
-  
-  .mb-3 {
-    margin-bottom: var(--space-3);
-  }
-  
-  .mb-4 {
-    margin-bottom: var(--space-4);
-  }
-  
-  .mb-5 {
-    margin-bottom: var(--space-5);
   }
   
   /* ===== THEME TOGGLE ===== */
@@ -391,26 +282,4 @@
   .theme-toggle:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
-  }
-  
-  /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: 768px) {
-    .site-header__inner {
-      flex-direction: column;
-      gap: var(--space-3);
-    }
-  
-    .site-nav__list {
-      flex-direction: column;
-      gap: var(--space-2);
-      text-align: center;
-    }
-  
-    .form__actions {
-      flex-direction: column;
-    }
-  
-    :root {
-      --container-width: min(100% - 2 * var(--space-3), 100%);
-    }
   }
