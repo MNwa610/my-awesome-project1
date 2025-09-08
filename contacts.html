@@ -47,7 +47,35 @@
         
         <section>
             <h2>Форма обратной связи</h2>
-            <p>Скоро здесь будет форма для обратной связи...</p>
+            <form id="contactPageForm" novalidate>
+                <label for="namePage">Имя</label>
+                <input id="namePage" name="name" type="text" required minlength="2" autocomplete="given-name">
+                
+                <label for="emailPage">E-mail</label>
+                <input id="emailPage" name="email" type="email" required autocomplete="email">
+                
+                <label for="phonePage">Телефон</label>
+                <input id="phonePage" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+                       aria-describedby="phoneHelpPage" placeholder="+7 (___) ___-__-__"
+                       required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
+                <small id="phoneHelpPage">Формат: +7 (900) 000-00-00</small>
+                
+                <label for="topicPage">Тема</label>
+                <select id="topicPage" name="topic" required>
+                    <option value="">Выберите тему</option>
+                    <option>Вопрос</option>
+                    <option>Заказ</option>
+                    <option>Сотрудничество</option>
+                    <option>Другое</option>
+                </select>
+                
+                <label for="messagePage">Сообщение</label>
+                <textarea id="messagePage" name="message" rows="4" required></textarea>
+                
+                <div class="form-actions">
+                    <button type="submit">Отправить</button>
+                </div>
+            </form>
         </section>
         
         <section>
@@ -62,6 +90,62 @@
         <p>&copy; 2025 Мой первый проект. Все права защищены.</p>
         <p>Телефон: +7 (910) 624-33-73</p>
     </footer>
+    <script>
+        // Валидация для формы на странице контактов
+        const contactPageForm = document.getElementById('contactPageForm');
+        const phonePageInput = document.getElementById('phonePage');
+        
+        // Функция для форматирования телефона
+        function formatPhoneNumber(input) {
+            const digits = input.value.replace(/\D/g, '').slice(0, 11);
+            const normalizedDigits = digits.replace(/^8/, '7'); // нормализуем 8 -> 7
+            
+            const parts = [];
+            if (normalizedDigits.length > 0) parts.push('+7');
+            if (normalizedDigits.length > 1) parts.push(' (' + normalizedDigits.slice(1, 4));
+            if (normalizedDigits.length >= 4) parts[parts.length - 1] += ')';
+            if (normalizedDigits.length >= 5) parts.push(' ' + normalizedDigits.slice(4, 7));
+            if (normalizedDigits.length >= 8) parts.push('-' + normalizedDigits.slice(7, 9));
+            if (normalizedDigits.length >= 10) parts.push('-' + normalizedDigits.slice(9, 11));
+            
+            input.value = parts.join('');
+        }
+        
+        // Обработчик события input для телефона
+        phonePageInput?.addEventListener('input', () => {
+            formatPhoneNumber(phonePageInput);
+        });
+        
+        // Обработка отправки формы
+        contactPageForm?.addEventListener('submit', (e) => {
+            // 1) Сброс кастомных сообщений
+            [...contactPageForm.elements].forEach(el => el.setCustomValidity?.(''));
+            
+            // 2) Проверка встроенных ограничений
+            if (!contactPageForm.checkValidity()) {
+                e.preventDefault();
+                
+                // Пример: таргетированное сообщение для email
+                const email = contactPageForm.elements.email;
+                if (email?.validity.typeMismatch) {
+                    email.setCustomValidity('Введите корректный e-mail, например name@example.com');
+                }
+                
+                contactPageForm.reportValidity(); // показать браузерные подсказки
+                
+                // Ally: подсветка проблемных полей
+                [...contactPageForm.elements].forEach(el => {
+                    if (el.willValidate) el.toggleAttribute('aria-invalid', !el.checkValidity());
+                });
+                return;
+            }
+            
+            // 3) Успешная «отправка» (без сервера)
+            e.preventDefault();
+            alert('Форма успешно отправлена!');
+            contactPageForm.reset();
+        });
+    </script>
 </body>
 </html>
 
