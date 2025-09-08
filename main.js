@@ -1,4 +1,22 @@
-// Получаем элементы
+// ===== THEME TOGGLE =====
+const KEY = 'theme';
+const btn = document.querySelector('.theme-toggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Автовыбор темы: системная или сохраненная
+if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
+    document.body.classList.add('theme-dark');
+    btn?.setAttribute('aria-pressed', 'true');
+}
+
+// Переключение темы
+btn?.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('theme-dark');
+    btn.setAttribute('aria-pressed', String(isDark));
+    localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+});
+
+// ===== MODAL FUNCTIONALITY =====
 const dialog = document.getElementById('contactDialog');
 const openButton = document.getElementById('openDialog');
 const closeButton = document.getElementById('closeDialog');
@@ -8,7 +26,7 @@ let lastActive = null;
 // Функция для форматирования телефона
 function formatPhoneNumber(input) {
     const digits = input.value.replace(/\D/g, '').slice(0, 11);
-    const normalizedDigits = digits.replace(/^8/, '7'); // нормализуем 8 -> 7
+    const normalizedDigits = digits.replace(/^8/, '7');
     
     const parts = [];
     if (normalizedDigits.length > 0) parts.push('+7');
@@ -21,49 +39,49 @@ function formatPhoneNumber(input) {
     input.value = parts.join('');
 }
 
-// Обработчик события input для телефона
+// Обработчик для телефона
 const phoneInput = document.getElementById('phone');
 phoneInput?.addEventListener('input', () => {
     formatPhoneNumber(phoneInput);
 });
 
 // Открытие модального окна
-openButton.addEventListener('click', () => {
+openButton?.addEventListener('click', () => {
     lastActive = document.activeElement;
     dialog.showModal();
     dialog.querySelector('input, select, textarea, button')?.focus();
 });
 
 // Закрытие модального окна
-closeButton.addEventListener('click', () => {
+closeButton?.addEventListener('click', () => {
     dialog.close('cancel');
 });
 
 // Обработка отправки формы
 form?.addEventListener('submit', (e) => {
-    // 1) Сброс кастомных сообщений
+    // Сброс кастомных сообщений
     [...form.elements].forEach(el => el.setCustomValidity?.(''));
     
-    // 2) Проверка встроенных ограничений
+    // Проверка встроенных ограничений
     if (!form.checkValidity()) {
         e.preventDefault();
         
-        // Пример: таргетированное сообщение для email
+        // Таргетированное сообщение для email
         const email = form.elements.email;
         if (email?.validity.typeMismatch) {
             email.setCustomValidity('Введите корректный e-mail, например name@example.com');
         }
         
-        form.reportValidity(); // показать браузерные подсказки
+        form.reportValidity();
         
-        // Ally: подсветка проблемных полей
+        // Подсветка проблемных полей
         [...form.elements].forEach(el => {
             if (el.willValidate) el.toggleAttribute('aria-invalid', !el.checkValidity());
         });
         return;
     }
     
-    // 3) Успешная «отправка» (без сервера)
+    // Успешная отправка
     e.preventDefault();
     alert('Форма успешно отправлена!');
     dialog.close('success');
@@ -71,6 +89,60 @@ form?.addEventListener('submit', (e) => {
 });
 
 // Возврат фокуса после закрытия модалки
-dialog.addEventListener('close', () => {
+dialog?.addEventListener('close', () => {
     lastActive?.focus();
+});
+
+// ===== FORM VALIDATION FOR CONTACTS PAGE =====
+const contactPageForm = document.getElementById('contactPageForm');
+const phonePageInput = document.getElementById('phonePage');
+
+// Обработчик для телефона на странице контактов
+phonePageInput?.addEventListener('input', () => {
+    formatPhoneNumber(phonePageInput);
+});
+
+// Обработка отправки формы на странице контактов
+contactPageForm?.addEventListener('submit', (e) => {
+    // Сброс кастомных сообщений
+    [...contactPageForm.elements].forEach(el => el.setCustomValidity?.(''));
+    
+    // Проверка встроенных ограничений
+    if (!contactPageForm.checkValidity()) {
+        e.preventDefault();
+        
+        // Таргетированное сообщение для email
+        const email = contactPageForm.elements.email;
+        if (email?.validity.typeMismatch) {
+            email.setCustomValidity('Введите корректный e-mail, например name@example.com');
+        }
+        
+        contactPageForm.reportValidity();
+        
+        // Подсветка проблемных полей
+        [...contactPageForm.elements].forEach(el => {
+            if (el.willValidate) el.toggleAttribute('aria-invalid', !el.checkValidity());
+        });
+        return;
+    }
+    
+    // Успешная отправка
+    e.preventDefault();
+    alert('Форма успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+    contactPageForm.reset();
+});
+
+// ===== ACTIVE NAV LINK HIGHLIGHTING =====
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.site-nav__link');
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage || 
+            (currentPage === '' && linkPage === 'index.html') ||
+            (currentPage === '/' && linkPage === 'index.html')) {
+            link.classList.add('site-nav__link--active');
+        }
+    });
 });
