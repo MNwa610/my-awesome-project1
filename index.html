@@ -15,9 +15,8 @@
     
     <!-- Шапка сайта -->
     <header class="site-header">
-        <div class="container site-header__inner">
+        <div class="site-header__inner">
             <a href="index.html" class="site-header__brand">Мой первый проект</a>
-            <!-- Главное меню навигации -->
             <nav class="site-nav" aria-label="Основная навигация">
                 <ul class="site-nav__list">
                     <li><a href="index.html" class="site-nav__link">Главная</a></li>
@@ -28,21 +27,19 @@
         </div>
     </header>
     
-    <!-- Уникальное основное содержимое страницы -->
-    <main class="container">
-        <!-- Герой-секция с фоновым изображением -->
+    <main>
+        <!-- Герой-секция -->
         <section class="hero">
-            <h1 class="hero__title">Добро пожаловать на наш сайт!</h1>
-            <p class="hero__description">Мы создаем современные веб-решения с использованием передовых технологий</p>
+            <h1>Добро пожаловать на наш сайт!</h1>
+            <p>Мы создаем современные веб-решения с использованием передовых технологий</p>
         </section>
         
-        <!-- Секция 1 с якорем -->
+        <!-- Секция услуг -->
         <section id="services" class="section">
             <h2 class="section__title">Наши услуги</h2>
-            <div class="section__content">
-                <p>Мы предоставляем широкий спектр услуг по веб-разработке, включая создание сайтов, веб-приложений и консультации.</p>
+            <div>
+                <p>Мы предоставляем широкий спектр услуг по веб-разработке.</p>
                 
-                <!-- Responsive изображение -->
                 <picture>
                     <source srcset="assets/services-640.webp 640w, assets/services-960.webp 960w" type="image/webp">
                     <source srcset="assets/services-640.jpg 640w, assets/services-960.jpg 960w" type="image/jpeg">
@@ -50,22 +47,20 @@
                          alt="Наши услуги по веб-разработке" 
                          width="640" 
                          height="360"
-                         loading="lazy"
-                         class="mb-3">
+                         loading="lazy">
                 </picture>
                 
                 <a href="#contacts" class="btn btn--primary">Связаться с нами</a>
             </div>
         </section>
         
-        <!-- Секция 2 с якорем -->
+        <!-- Секция портфолио -->
         <section id="portfolio" class="section">
             <h2 class="section__title">Портфолио</h2>
-            <div class="section__content">
-                <p>Здесь будут представлены примеры наших работ и проектов, которые мы реализовали для наших клиентов.</p>
+            <div>
+                <p>Примеры наших работ и проектов.</p>
                 
-                <!-- Видео с локальным контентом -->
-                <div class="media mb-3">
+                <div class="media">
                     <video controls preload="metadata" playsinline width="960" height="540" poster="assets/video-poster.jpg">
                         <source src="assets/project-showcase.mp4" type="video/mp4">
                         <source src="assets/project-showcase.webm" type="video/webm">
@@ -76,19 +71,18 @@
             </div>
         </section>
         
-        <!-- Секция 3 с якорем -->
+        <!-- Секция контактов -->
         <section id="contacts" class="section">
             <h2 class="section__title">Контактная информация</h2>
-            <div class="section__content">
-                <p>Свяжитесь с нами для обсуждения вашего проекта или получения дополнительной информации о наших услугах.</p>
-                <a href="contacts.html" class="btn btn--secondary">Подробнее</a>
+            <div>
+                <p>Свяжитесь с нами для обсуждения вашего проекта.</p>
+                <a href="contacts.html" class="btn btn--primary">Подробнее</a>
             </div>
         </section>
     </main>
     
-    <!-- Подвал сайта -->
     <footer class="site-header">
-        <div class="container text-center">
+        <div>
             <p>&copy; 2025 Мой первый проект. Все права защищены.</p>
             <p>Телефон: +7 (910) 624-33-73</p>
         </div>
@@ -99,10 +93,7 @@
     
     <!-- Модалка с формой -->
     <dialog id="contactDialog" aria-labelledby="dialogTitle">
-        <div class="modal__header">
-            <h2 id="dialogTitle" class="modal__title">Обратная связь</h2>
-            <button class="modal__close" id="closeDialog" aria-label="Закрыть">×</button>
-        </div>
+        <h2 id="dialogTitle">Обратная связь</h2>
         
         <form id="contactForm" method="dialog" novalidate class="form">
             <div class="form__group">
@@ -135,7 +126,6 @@
                     <option>Вопрос</option>
                     <option>Заказ</option>
                     <option>Сотрудничество</option>
-                    <option>Другое</option>
                 </select>
             </div>
             
@@ -145,8 +135,8 @@
             </div>
             
             <div class="form__actions">
-                <button type="button" id="closeDialogBtn" class="btn btn--secondary">Закрыть</button>
-                <button type="submit" class="btn btn--primary">Отправить</button>
+                <button type="button" id="closeDialog">Закрыть</button>
+                <button type="submit">Отправить</button>
             </div>
         </form>
     </dialog>

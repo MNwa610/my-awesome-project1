@@ -3,7 +3,7 @@ const KEY = 'theme';
 const btn = document.querySelector('.theme-toggle');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-// Автовыбор темы: системная или сохраненная
+// Автовыбор темы
 if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
     document.body.classList.add('theme-dark');
     btn?.setAttribute('aria-pressed', 'true');
@@ -130,19 +130,4 @@ contactPageForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     alert('Форма успешно отправлена! Мы свяжемся с вами в ближайшее время.');
     contactPageForm.reset();
-});
-
-// ===== ACTIVE NAV LINK HIGHLIGHTING =====
-document.addEventListener('DOMContentLoaded', () => {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.site-nav__link');
-    
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href');
-        if (linkPage === currentPage || 
-            (currentPage === '' && linkPage === 'index.html') ||
-            (currentPage === '/' && linkPage === 'index.html')) {
-            link.classList.add('site-nav__link--active');
-        }
-    });
 });
