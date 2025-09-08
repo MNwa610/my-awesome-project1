@@ -1,56 +1,106 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О нас - Мой первый проект</title>
     <meta name="description" content="Узнайте больше о нашем проекте и истории его создания">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <script src="main.js" defer></script>
 </head>
 <body>
+    <!-- Кнопка переключения темы -->
+    <button class="theme-toggle" type="button" aria-pressed="false">🌓</button>
+    
     <!-- Шапка сайта -->
-    <header>
-        <a href="index.html">Мой первый проект</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="index.html" class="site-header__brand">Мой первый проект</a>
+            <!-- Главное меню навигации -->
+            <nav class="site-nav" aria-label="Основная навигация">
+                <ul class="site-nav__list">
+                    <li><a href="index.html" class="site-nav__link">Главная</a></li>
+                    <li><a href="about.html" class="site-nav__link">О нас</a></li>
+                    <li><a href="contacts.html" class="site-nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     
     <!-- Уникальное основное содержимое страницы -->
-    <main>
+    <main class="container">
         <!-- Простые "хлебные крошки" -->
-        <nav aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a> →
-            <span>О нас</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <ul class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a></li>
+                <li class="breadcrumbs__item">О нас</li>
+            </ul>
         </nav>
         
-        <h1>О нашем проекте</h1>
+        <h1 class="section__title">О нашем проекте</h1>
         
-        <section>
-            <h2>Наша история</h2>
-            <p>Этот проект был создан как учебное пособие для освоения веб-разработки, Git и GitHub. Мы начали с простой HTML-страницы и постепенно добавляем новые функции.</p>
+        <section class="section">
+            <h2 class="section__title">Наша история</h2>
+            <div class="section__content">
+                <p>Этот проект был создан как учебное пособие для освоения веб-разработки, Git и GitHub. Мы начали с простой HTML-страницы и постепенно добавляем новые функции.</p>
+                
+                <!-- Responsive изображение -->
+                <img src="assets/history-640.jpg" 
+                     srcset="assets/history-640.jpg 640w, assets/history-960.jpg 960w"
+                     sizes="(max-width: 700px) 92vw, (max-width: 1200px) 640px, 960px"
+                     alt="История нашего проекта"
+                     width="640"
+                     height="360"
+                     loading="lazy"
+                     class="mb-3">
+            </div>
         </section>
         
-        <section>
-            <h2>Наша команда</h2>
-            <p>Над проектом работает начинающий веб-разработчик, который изучает современные технологии и лучшие практики разработки.</p>
+        <section class="section">
+            <h2 class="section__title">Наша команда</h2>
+            <div class="section__content">
+                <p>Над проектом работает начинающий веб-разработчик, который изучает современные технологии и лучшие практики разработки.</p>
+                
+                <!-- Видео с Rutube -->
+                <div class="media mb-3">
+                    <iframe src="https://rutube.ru/play/embed/XXXXXXXXXXX"
+                            title="Видео о нашей команде"
+                            allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                            allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
         </section>
         
-        <section>
-            <h2>Наши цели</h2>
-            <p>Мы стремимся создать качественный веб-проект, который послужит хорошей основой для дальнейшего обучения и развития.</p>
+        <section class="section">
+            <h2 class="section__title">Наши цели</h2>
+            <div class="section__content">
+                <p>Мы стремимся создать качественный веб-проект, который послужит хорошей основой для дальнейшего обучения и развития.</p>
+            </div>
         </section>
     </main>
     
     <!-- Подвал сайта -->
-    <footer>
-        <p>&copy; 2025 Мой первый проект. Все права защищены.</p>
-        <p>Телефон: +7 (910) 624-33-73</p>
+    <footer class="site-header">
+        <div class="container text-center">
+            <p>&copy; 2025 Мой первый проект. Все права защищены.</p>
+            <p>Телефон: +7 (910) 624-33-73</p>
+        </div>
     </footer>
+    
+    <!-- Кнопка открытия модалки -->
+    <button id="openDialog" class="btn btn--primary" type="button">Написать нам</button>
+    
+    <!-- Модалка с формой -->
+    <dialog id="contactDialog" aria-labelledby="dialogTitle">
+        <div class="modal__header">
+            <h2 id="dialogTitle" class="modal__title">Обратная связь</h2>
+            <button class="modal__close" id="closeDialog" aria-label="Закрыть">×</button>
+        </div>
+        
+        <form id="contactForm" method="dialog" novalidate class="form">
+            <!-- Форма такая же как в index.html -->
+        </form>
+    </dialog>
 </body>
 </html>
