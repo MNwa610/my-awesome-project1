@@ -273,7 +273,7 @@
     border: none;
     border-radius: 50%;
     background: var(--color-primary);
-    color: rgb(3, 3, 3);
+    color: rgb(247, 247, 247);
     cursor: pointer;
     z-index: 1000;
     box-shadow: var(--shadow);
