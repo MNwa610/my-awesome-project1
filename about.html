@@ -40,13 +40,14 @@
             <div>
                 <p>Этот проект был создан как учебное пособие для освоения веб-разработки.</p>
                 
-                <img src="assets/history-640.jpg" 
-                     srcset="assets/history-640.jpg 640w, assets/history-960.jpg 960w"
-                     sizes="(max-width: 700px) 92vw, (max-width: 1200px) 640px, 960px"
-                     alt="История нашего проекта"
-                     width="640"
-                     height="360"
-                     loading="lazy">
+                <picture>
+                    <source srcset="assets/services-640.jpg 640w" type="image/jpeg">
+                    <img src="assets/services-640.jpg" 
+                         alt="Наши услуги по веб-разработке" 
+                         width="640" 
+                         height="360"
+                         loading="lazy">
+                </picture>
             </div>
         </section>
         
@@ -56,10 +57,15 @@
                 <p>Над проектом работает начинающий веб-разработчик.</p>
                 
                 <div class="media">
-                    <iframe src="https://rutube.ru/play/embed/XXXXXXXXXXX"
-                            title="Видео о нашей команде"
-                            allow="autoplay; encrypted-media; picture-in-picture; web-share"
-                            allowfullscreen loading="lazy"></iframe>
+                    <iframe 
+                        src="https://vk.com/video_ext.php?oid=-98421875&id=456243965&hash=hash" 
+                        width="960" 
+                        height="540" 
+                        frameborder="0" 
+                        allowfullscreen
+                        title="Видео о нашей команде"
+                        loading="lazy">
+                    </iframe>
                 </div>
             </div>
         </section>
